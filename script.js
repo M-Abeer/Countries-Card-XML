@@ -4,21 +4,21 @@ const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
 ///////////////////////////////////////
+const qwerty = function (country) {
+  const request = new XMLHttpRequest();
+  request.open('GET', `https://restcountries.com/v3.1/name/${country}`);
+  request.send();
+  //Here we send request
 
-const request = new XMLHttpRequest();
-request.open('GET', 'https://restcountries.com/v3.1/name/pakistan');
-request.send();
-//Here we send request
-
-//Now we use callback and higher order function
-//Now this task is doing in bg, when it is loaded
-//this callback function called
-//this is request object
-request.addEventListener('load', function () {
-  //   console.log(this.responseText);
-  const [data] = JSON.parse(this.responseText);
-  console.log(data);
-  const html = `
+  //Now we use callback and higher order function
+  //Now this task is doing in bg, when it is loaded
+  //this callback function called
+  //this is request object
+  request.addEventListener('load', function () {
+    //   console.log(this.responseText);
+    const [data] = JSON.parse(this.responseText);
+    console.log(data);
+    const html = `
 <article class="country">
           <img class="country__img" src="${data.flags.svg}" />
           <div class="country__data">
@@ -30,6 +30,9 @@ request.addEventListener('load', function () {
           </div>
         </article>
 `;
-  countriesContainer.insertAdjacentHTML('beforeend', html);
-  countriesContainer.style.opacity = 1;
-});
+    countriesContainer.insertAdjacentHTML('beforeend', html);
+    countriesContainer.style.opacity = 1;
+  });
+};
+
+qwerty('pakistan');
